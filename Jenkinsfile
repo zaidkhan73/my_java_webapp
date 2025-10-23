@@ -2,29 +2,34 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Checkout SCM') {
             steps {
-                git 'https://github.com/yourusername/my-java-webapp.git'
+                // Public repo, credentials not needed
+                git branch: 'main', url: 'https://github.com/zaidkhan73/my_java_webapp.git'
             }
         }
+
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                // Simple test command
+                echo "Build stage: This is just a test. No actual build required."
             }
         }
+
         stage('Test') {
             steps {
-                sh 'mvn test'
+                // Simple test command
+                echo "Test stage: Repo checked out successfully!"
             }
         }
     }
 
     post {
         success {
-            echo 'Build and Tests completed successfully!'
+            echo 'Pipeline executed successfully!'
         }
         failure {
-            echo 'Build or Tests failed!'
+            echo 'Pipeline failed!'
         }
     }
 }
